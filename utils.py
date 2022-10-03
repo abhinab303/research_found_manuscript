@@ -225,7 +225,8 @@ def evaluteTop1_names(model, dataLoader, class_num=50, per_class=False):
             indices = data[7].cuda()
             label = data[3].cuda()
 
-            outputs = model(descriptions, names, indices)
+            # outputs = model(descriptions, names, indices)
+            outputs = model(descriptions, names)
 
             _, predicted = torch.max(outputs, 1)
             total += label.size(0)
@@ -268,7 +269,8 @@ def evaluteTop5_names(model, dataLoader):
             indices = data[7].cuda()
             label = data[3].cuda()
 
-            outputs = model(descriptions, names, indices)
+            # outputs = model(descriptions, names, indices)
+            outputs = model(descriptions, names)
 
             maxk = max((1, 5))
             y_resize = label.view(-1, 1)
