@@ -9,12 +9,12 @@ from utils import load_data_train_names, load_data_test_names, evaluteTop5_names
 from model.servenetlt import ServeNet
 
 
-epochs = 2
+epochs = 20
 SEED = 123
 LEARNING_RATE = 0.001
 WEIGHT_DECAY = 0.01
 EPSILON = 1e-8
-BATCH_SIZE = 64
+BATCH_SIZE = 512
 CLASS_NUM = 50
 cat_num = "50"
 
