@@ -9,7 +9,7 @@ from utils import load_data_train_names, load_data_test_names, evaluteTop5_names
 from model.servenetlt import ServeNet
 
 
-epochs = 20
+epochs = 2
 SEED = 123
 LEARNING_RATE = 0.004
 WEIGHT_DECAY = 0.01
@@ -79,3 +79,4 @@ if __name__ == "__main__":
         print("=======>top5 acc on the test:{}".format(str(evaluteTop5_names(model, test_dataloader))))
 
     print("=======>top1 acc on the test:{}".format(str(evaluteTop1_names(model, test_dataloader, CLASS_NUM, True))))
+    torch.save(model.state_dict(), "/home/aa7514/PycharmProjects/research_found_manuscript/saved_model")
