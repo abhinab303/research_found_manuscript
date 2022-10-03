@@ -82,6 +82,7 @@ class MutliHead(nn.Module):
         self.reset_parameters(self.weight)
 
     def forward(self, x):
+        print("WEIGHT: ", self.weight.shape)
         normed_w = self.multi_head_call(self.causal_norm, self.weight, weight=self.norm_scale)
         normed_x = self.multi_head_call(self.l2_norm, x)
         y = torch.mm(normed_x * self.scale, normed_w.t())

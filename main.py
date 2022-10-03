@@ -9,7 +9,7 @@ from utils import load_data_train_names, load_data_test_names, evaluteTop5_names
 from model.servenetlt import ServeNet
 
 
-epochs = 40
+epochs = 2
 SEED = 123
 LEARNING_RATE = 0.001
 WEIGHT_DECAY = 0.01
@@ -31,7 +31,8 @@ if __name__ == "__main__":
     test_dataloader = DataLoader(test_data, batch_size=BATCH_SIZE)
 
     model = ServeNet(768, CLASS_NUM)
-    # model.bert_description.requires_grad_(False)
+    model.bert_description.requires_grad_(False)
+    model.bert_name.requires_grad_(False)
     model = torch.nn.DataParallel(model)
     model = model.cuda()
     model.train()
