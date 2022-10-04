@@ -205,7 +205,7 @@ def evaluteTop5(model, dataLoader):
     return 100 * correct / total
 
 
-def evaluteTop1_names(model, dataLoader, class_num=50, per_class=False):
+def evaluteTop1_names(model, dataLoader, class_num=50, per_class=False, p=1):
     model.eval()
     correct = 0
     total = 0
@@ -226,7 +226,7 @@ def evaluteTop1_names(model, dataLoader, class_num=50, per_class=False):
             label = data[3].cuda()
 
             # outputs = model(descriptions, names, indices)
-            outputs = model(descriptions, names)
+            outputs = model(descriptions, names, p=p)
 
             _, predicted = torch.max(outputs, 1)
             total += label.size(0)
@@ -238,15 +238,20 @@ def evaluteTop1_names(model, dataLoader, class_num=50, per_class=False):
                 labels = label[i]
                 class_correct[labels] += c[i].item()
                 class_total[labels] += 1
-    if per_class:
-        print('each class accuracy of: ' )
-        for i in range(class_num):
-            #print('Accuracy of ======' ,100 * class_correct[i] / class_total[i])
-            print(100 * class_correct[i] / class_total[i])
 
-        print('total class_total: ')
-        for i in range(class_num):
-            print(class_total[i])
+    acc_df = pd.DataFrame(np.column_stack([class_correct, class_total]), columns=['class_correct', 'class_total'])
+    df = acc_df.sort_values(['class_total'])
+    print("tail_accuracy: ", df['class_correct'][:17].sum()/17)
+    print("tail_accuracy 2: ", df['class_correct'][:17].sum() * 100.0 / df['class_total'][:17].sum())
+    # if per_class:
+    #     print('each class accuracy of: ' )
+    #     for i in range(class_num):
+    #         #print('Accuracy of ======' ,100 * class_correct[i] / class_total[i])
+    #         print(100 * class_correct[i] / class_total[i])
+    #
+    #     print('total class_total: ')
+    #     for i in range(class_num):
+    #         print(class_total[i])
 
     return 100 * correct / total
 

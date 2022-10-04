@@ -5,7 +5,7 @@ from model.multi_head import weighted_sum, MutliHead
 
 
 class ServeNet(torch.nn.Module):
-    def __init__(self, hiddenSize, CLASS_NUM):
+    def __init__(self, hiddenSize, CLASS_NUM, p=1):
         super(ServeNet, self).__init__()
         self.hiddenSize = hiddenSize
 
@@ -22,7 +22,7 @@ class ServeNet(torch.nn.Module):
         self.weight_sum = weighted_sum()
         self.mutliHead = MutliHead(num_classes=CLASS_NUM)
 
-    def forward(self, names, descriptions):
+    def forward(self, names, descriptions, p=1):
         self.lstm.flatten_parameters()
 
         # name
@@ -44,6 +44,6 @@ class ServeNet(torch.nn.Module):
 
         # sum
         all_features = self.weight_sum(name_features, hidden)
-        output = self.mutliHead(all_features)
+        output = self.mutliHead(all_features, p)
 
         return output

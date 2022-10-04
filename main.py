@@ -79,4 +79,4 @@ if __name__ == "__main__":
         print("=======>top5 acc on the test:{}".format(str(evaluteTop5_names(model, test_dataloader))))
 
     print("=======>top1 acc on the test:{}".format(str(evaluteTop1_names(model, test_dataloader, CLASS_NUM, True))))
-    torch.save(model.state_dict(), "/home/aa7514/PycharmProjects/research_found_manuscript/saved_model")
+    torch.save(model.state_dict(), "/home/aa7514/PycharmProjects/research_found_manuscript/saved_model2")
