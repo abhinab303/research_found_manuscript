@@ -1,4 +1,6 @@
 import os
+import pdb
+
 from tqdm import tqdm
 
 from torch.utils.data import DataLoader
@@ -29,6 +31,8 @@ if __name__ == "__main__":
 
     train_dataloader = DataLoader(train_data, batch_size=BATCH_SIZE)
     test_dataloader = DataLoader(test_data, batch_size=BATCH_SIZE)
+
+    pdb.set_trace()
 
     model = ServeNet(768, CLASS_NUM)
     model.bert_description.requires_grad_(False)

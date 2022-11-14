@@ -1,3 +1,4 @@
+import pdb
 
 import pandas as pd
 import numpy as np
@@ -243,6 +244,7 @@ def evaluteTop1_names(model, dataLoader, class_num=50, per_class=False, p=1):
     df = acc_df.sort_values(['class_total'])
     print("tail_accuracy: ", df['class_correct'][:17].sum()/17)
     print("tail_accuracy 2: ", df['class_correct'][:17].sum() * 100.0 / df['class_total'][:17].sum())
+    pdb.set_trace()
     # if per_class:
     #     print('each class accuracy of: ' )
     #     for i in range(class_num):
